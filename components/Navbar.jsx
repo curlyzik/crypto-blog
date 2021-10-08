@@ -54,7 +54,7 @@ const Navbar = ({ collapsed }) => {
             icon={<BulbOutlined />}
             className="flex items-center"
           >
-            <Link href="/cryptocurrencies">
+            <Link href="/news">
               <a>News</a>
             </Link>
           </Menu.Item>

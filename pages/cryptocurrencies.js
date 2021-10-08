@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import millify from "millify";
-import { Card, Row, Col, Input, Skeleton } from "antd";
+import { Card, Row, Col, Input, Skeleton, Space } from "antd";
 import Link from "next/link";
 import { useGetCryptosQuery } from "../src/services/cryptoApi";
 
@@ -25,21 +25,21 @@ const Cryptocurrencies = ({ simplified }) => {
         <div className="search-crypto">
           <Input
             placeholder="Search Crypto"
+            className='border-0 ring-inset ring-blue-500 p-4 text-base'
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
       )}
-      <Row gutter={[32, 32]} className="mt-8">
-      
+      <Row gutter={[24, 24]} className="mt-8">
         {cryptos?.map((currency) => (
-          <Col xs={24} sm={12} lg={6} key={currency.id}>
+          <Col xs={24} sm={12} lg={6} key={currency.id} className='grid items-stretch'>
             <Link href={`/crypto/${currency.id}`}>
               <Card
                 title={`${currency.rank}. ${currency.name}`}
                 extra={
                   <img
                     src={currency.iconUrl}
-                    className="w-16"
+                    className="md:w-16 w-10"
                     alt={currency.name}
                   />
                 }
@@ -47,13 +47,16 @@ const Cryptocurrencies = ({ simplified }) => {
               >
                 <div>
                   <p>
-                    <span className="font-bold">Price:</span> {millify(currency.price)}
+                    <span className="font-bold">Price:</span>{" "}
+                    {millify(currency.price)}
                   </p>
                   <p>
-                    <span className="font-bold">Market Cap:</span> {millify(currency.marketCap)}
+                    <span className="font-bold">Market Cap:</span>{" "}
+                    {millify(currency.marketCap)}
                   </p>
                   <p>
-                    <span className="font-bold">Daily Change:</span> {millify(currency.change)}%
+                    <span className="font-bold">Daily Change:</span>{" "}
+                    {millify(currency.change)}%
                   </p>
                 </div>
               </Card>
