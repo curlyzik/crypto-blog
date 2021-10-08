@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import millify from "millify";
 import { Card, Row, Col, Input, Skeleton } from "antd";
-import Link from 'next/link'
+import Link from "next/link";
 import { useGetCryptosQuery } from "../src/services/cryptoApi";
 
 const Cryptocurrencies = ({ simplified }) => {
@@ -29,24 +29,33 @@ const Cryptocurrencies = ({ simplified }) => {
           />
         </div>
       )}
-      <Row gutter={[32, 32]} className="crypto-card-container">
+      <Row gutter={[32, 32]} className="mt-8">
+      
         {cryptos?.map((currency) => (
-          <Col xs={24} sm={12} lg={6} className="crypto-card" key={currency.id}>
+          <Col xs={24} sm={12} lg={6} key={currency.id}>
             <Link href={`/crypto/${currency.id}`}>
               <Card
                 title={`${currency.rank}. ${currency.name}`}
                 extra={
                   <img
                     src={currency.iconUrl}
-                    className="crypto-image"
+                    className="w-16"
                     alt={currency.name}
                   />
                 }
-                hoverable
+                className="border-0 shadow-lg hover:shadow-xl transition-all cursor-pointer duration-500 rounded-2xl"
               >
-                <p>Price: {millify(currency.price)}</p>
-                <p>Market Cap: {millify(currency.marketCap)}</p>
-                <p>Daily Change: {millify(currency.change)}%</p>
+                <div>
+                  <p>
+                    <span className="font-bold">Price:</span> {millify(currency.price)}
+                  </p>
+                  <p>
+                    <span className="font-bold">Market Cap:</span> {millify(currency.marketCap)}
+                  </p>
+                  <p>
+                    <span className="font-bold">Daily Change:</span> {millify(currency.change)}%
+                  </p>
+                </div>
               </Card>
             </Link>
           </Col>

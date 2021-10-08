@@ -10,10 +10,10 @@ const Layout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const toggle = () => setCollapsed(!collapsed);
   return (
-    <Layouts>
+    <Layouts className={`${collapsed && 'ml-[80px]'} ml-[200px]`}>
       <Navbar collapsed={collapsed} />
       <Layouts>
-        <Header className="bg-white flex items-center">
+        <Header className="bg-white flex items-center fixed w-full z-10">
           <div onClick={toggle} className="text-xl">
             {collapsed ? (
               <MenuUnfoldOutlined className="cursor-pointer" />
@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
           </div>
         </Header>
 
-        <Content className="m-5 bg-white p-7">{children}</Content>
+        <Content className="m-5 bg-white p-7 mt-16">{children}</Content>
       </Layouts>
     </Layouts>
   );
