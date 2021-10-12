@@ -21,8 +21,6 @@ const News = ({ simplified }) => {
   const { data } = useGetCryptosQuery(100);
   if (!cryptoNews?.value) return <Skeleton />;
 
-  console.log(cryptoNews.value);
-
   return (
     <>
       {!simplified && (
@@ -50,7 +48,7 @@ const News = ({ simplified }) => {
 
       <Row gutter={[24, 24]} className="mt-6">
         {cryptoNews?.value?.map((news, i) => (
-          <Col xs={24} sm={12} lg={8} key={i} className="grid items-stretch">
+          <Col xs={24} sm={24} lg={8} key={i} className="grid items-stretch">
             <Card className="border-0 shadow-lg hover:shadow-xl transition duration-300 rounded-2xl">
               <a
                 href={news.url}

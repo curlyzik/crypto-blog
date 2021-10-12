@@ -18,7 +18,7 @@ const Navbar = ({ collapsed }) => {
         trigger={null}
         collapsible
         collapsed={collapsed}
-        className="min-h-full fixed overflow-auto left-0 z-50"
+        className="min-h-full fixed left-0 z-50"
       >
         <div className="text-3xl text-gray-900 p-5 ">Logo</div>
         <Menu theme="" mode="inline" defaultSelectedKeys={["1"]}>

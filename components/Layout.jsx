@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const toggle = () => setCollapsed(!collapsed);
   return (
-    <Layouts className={`${collapsed && "ml-[80px]"} ml-[200px]`}>
+    <Layouts className={`${collapsed && "ml-[80px]"}  ${!collapsed && "ml-[200px]"}`}>
       <Navbar collapsed={collapsed} />
       <Layouts>
         <Header className="bg-white flex items-center fixed w-full z-10">
