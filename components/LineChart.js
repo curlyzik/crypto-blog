@@ -42,10 +42,11 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
 
   return (
     <>
-      <Row className="flex items-center flex-col md:flex-row gap-4 md:justify-between mb-4">
-        <h2 className='text-3xl font-semibold'>
-          {coinName} Price chart
-        </h2>
+      <Row className="flex items-center flex-col md:flex-row gap-4 md:justify-between mb-4 mt-4">
+        <div className="flex gap-x-2">
+          <span className="text-3xl">USD</span>
+          <p className=" text-6xl font-medium">{currentPrice}</p>
+        </div>
         <Col className="flex md:items-center md:justify-center flex-col md:flex-row gap-3 font-bold">
           <p>{coinHistory?.data?.change}</p>
           <p>

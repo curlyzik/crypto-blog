@@ -4,6 +4,7 @@ import "tailwindcss/tailwind.css";
 import { store } from "../src/app/store";
 import { Provider } from "react-redux";
 import Layout from "../components/Layout";
+import '../style.css'
 
 function MyApp({ Component, pageProps }) {
   return (

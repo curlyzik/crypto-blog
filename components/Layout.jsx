@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
           </div>
         </Header>
 
-        <Content className="m-5 p-6 md:p-10 mt-16 bg-[#f0f2f5]">
+        <Content className="m-5 p-6 md:p-10 mt-16 bg-white">
           {children}
         </Content>
       </Layouts>

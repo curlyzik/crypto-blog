@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      'body': ["Merriweather"],
+      body: ['Josefin Sans', 'sans-serif'],
     },
   },
   variants: {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import HTMLReactParser from "html-react-parser";
 import { useRouter } from "next/router";
 import millify from "millify";
-import { Col, Row, Typography, Select, Skeleton } from "antd";
+import { Col, Row, Typography, Select, Skeleton, Space } from "antd";
 import {
   MoneyCollectOutlined,
   DollarCircleOutlined,
@@ -33,6 +33,7 @@ const Cryptocurrency = () => {
     timePeriod,
   });
   const cryptoDetails = data?.data?.coin;
+  console.log(cryptoDetails);
 
   if (isFetching) return <Skeleton />;
 
@@ -95,11 +96,18 @@ const Cryptocurrency = () => {
   ];
 
   return (
-    <div>
-      <Row className="flex items-center justify-center border-b-2 pb-5 mb-5">
+    <div className="">
+      <Row className="flex items-center justify-center pb-5 mb-5">
         <Col className="flex flex-col justify-center items-center  gap-3">
-          <div className="text-lg md:text-3xl uppercase font-bold">
-            {cryptoDetails.name}{" "}
+          <div className="flex items-center gap-x-2">
+            <img
+              src={cryptoDetails.iconUrl}
+              alt={cryptoDetails.name}
+              className=" w-10"
+            />
+            <h1 className="text-lg md:text-3xl uppercase font-bold">
+              {cryptoDetails.name}
+            </h1>
             <span className="lowercase">({cryptoDetails.slug})</span> Price
           </div>
           <p>
@@ -109,88 +117,87 @@ const Cryptocurrency = () => {
         </Col>
       </Row>
 
-      <Row>
-        <Col lg={6}>
-          <Select
-            defaultValue="7d"
-            className="w-full mb-4"
-            placeholder="Select Time Period"
-            onChange={(value) => setTimePeriod(value)}
-          >
-            {time.map((date) => (
-              <Option key={date}>{date}</Option>
-            ))}
-          </Select>
-        </Col>
-      </Row>
-
-      <Row>
-        <Col lg={24}>
-          <LineChart
-            coinHistory={coinHistory}
-            currentPrice={millify(cryptoDetails.price)}
-            coinName={cryptoDetails.name}
-          />
-        </Col>
-      </Row>
-
-      <Row className="">
-          <Col className="">
-            <Title level={3} className="">
-              {cryptoDetails.name} Value Statistics
-            </Title>
-            <p>Overview showing the stats of {cryptoDetails.name}</p>
+      <div className=" border p-6 mb-9">
+        <Row>
+          <Col lg={6}>
+            <Select
+              defaultValue="7d"
+              className="w-full mb-4"
+              placeholder="Select Time Period"
+              onChange={(value) => setTimePeriod(value)}
+            >
+              {time.map((date) => (
+                <Option key={date}>{date}</Option>
+              ))}
+            </Select>
           </Col>
-          {stats.map(({ title, value, icon }) => (
-            <Col className="">
-              <Text>{icon}</Text>
-              <Text>{title}</Text>
+        </Row>
 
-              <Text className="">{value}</Text>
-            </Col>
-          ))}
-
-
-        <Col className="">
-          <Col className="">
-            <Title level={3} className="">
-              Other Statistics
-            </Title>
-            <p>Overview showing the stats of all cryptocurrencies</p>
+        <Row>
+          <Col lg={24}>
+            <LineChart
+              coinHistory={coinHistory}
+              currentPrice={millify(cryptoDetails.price)}
+              coinName={cryptoDetails.name}
+            />
           </Col>
-          {genericStats.map(({ title, value, icon }) => (
-            <Col className="">
-              <Text>{icon}</Text>
-              <Text>{title}</Text>
-              <Text className="">{value}</Text>
-            </Col>
-          ))}
-        </Col>
-      </Row>
+        </Row>
 
-      <Row className="">
-        <Col className="">
-          <Title level={3} className="">
-            What is {cryptoDetails.name}
-            {HTMLReactParser(cryptoDetails.description)}
-          </Title>
-        </Col>
-        <Col className="">
-          <Title level={3} className="">
-            {cryptoDetails.name} Link
-          </Title>
+        <div className="mt-6 flex flex-col gap-y-8">
+          <div>
+            <h1 className="text-lg font-bold">Market Stats</h1>
+            <div className="grid grid-cols-6 items-center mt-4">
+              {stats.map(({ title, value, icon }) => (
+                <div className="flex flex-col justify-center gap-y-2">
+                  <div>
+                    <h3 className="text-gray-500 text-sm font-bold">{title}</h3>
+                  </div>
+                  <p className="text-lg text-black font-medium">{value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h1 className="text-lg font-bold">Other Stats</h1>
+            <div className="grid grid-cols-6 items-center mt-4">
+              {genericStats.map(({ title, value, icon }) => (
+                <div className="flex flex-col justify-center gap-y-2">
+                  <div>
+                    <h3 className="text-gray-500 text-sm font-bold">{title}</h3>
+                  </div>
+                  <p className="text-lg text-black font-medium">{value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-x-5 items-start">
+        <div className="border p-6">
+          <h3 className="text-2xl font-bold">What is {cryptoDetails.name}</h3>
+          {HTMLReactParser(cryptoDetails.description)}
+        </div>
+        <div className="border p-6">
+          <h3 className="text-2xl mb-4">{cryptoDetails.name} Links</h3>
           {cryptoDetails.links.map((link) => (
-            <Col className="" key={link.name}>
-              <Title className="" level={5}>
-                {link.type}
-              </Title>
-              <a href={link.url} target="_blank" rel="noreferrer">
-                {link.name}
+            <div key={link.name} className="grid grid-cols-2 gap-x-5">
+              <p className="text-lg font-medium mb-5">{link.type}</p>
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noreferrer"
+                className=" text-gray-500 hover:text-black"
+              >
+                <span className="hover:border-b hover:border-black transition-all duration-300">
+                  {link.name}
+                </span>
               </a>
-            </Col>
+            </div>
           ))}
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 };
