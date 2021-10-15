@@ -192,7 +192,7 @@ const Cryptocurrency = () => {
           <h3 className="text-2xl font-bold">What is {cryptoDetails.name}</h3>
           {HTMLReactParser(cryptoDetails.description)}
         </div>
-        <div className="mt-8 md:border md:p-6">
+        <div className="mt-8 md:mt-0 md:border md:p-6">
           <h3 className="text-2xl mb-4">{cryptoDetails.name} Links</h3>
           {cryptoDetails.links.map((link) => (
             <div key={link.name} className="grid grid-cols-2 gap-x-5">
