@@ -40,7 +40,7 @@ const Navbar = ({ collapsed }) => {
               <a>Cryptocurrencies</a>
             </Link>
           </Menu.Item>
-          <Menu.Item
+          {/* <Menu.Item
             key="3"
             icon={<MoneyCollectOutlined />}
             className="flex items-center"
@@ -48,7 +48,7 @@ const Navbar = ({ collapsed }) => {
             <Link href="/exchanges">
               <a>Exchanges</a>
             </Link>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item
             key="4"
             icon={<BulbOutlined />}

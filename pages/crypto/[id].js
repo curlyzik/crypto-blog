@@ -33,7 +33,6 @@ const Cryptocurrency = () => {
     timePeriod,
   });
   const cryptoDetails = data?.data?.coin;
-  console.log(cryptoDetails);
 
   if (isFetching) return <Skeleton />;
 
@@ -96,30 +95,34 @@ const Cryptocurrency = () => {
   ];
 
   return (
-    <div className="">
-      <Row className="flex items-center justify-center pb-5 mb-5">
-        <Col className="flex flex-col justify-center items-center  gap-3">
-          <div className="flex items-center gap-x-2">
+    <div>
+      <div className="flex items-center md:justify-center pb-5 mb-5">
+        <div className="flex flex-col md:justify-center md:items-center gap-3">
+          <div className="flex md:flex-row md:items-center gap-x-3">
             <img
               src={cryptoDetails.iconUrl}
               alt={cryptoDetails.name}
-              className=" w-10"
+              className="w-10"
             />
-            <h1 className="text-lg md:text-3xl uppercase font-bold">
-              {cryptoDetails.name}
-            </h1>
-            <span className="lowercase">({cryptoDetails.slug})</span> Price
+            <div className="flex flex-col md:flex-row md:justify-center md:items-center gap-x-2">
+              <h1 className="text-3xl md:text-4xl uppercase font-bold">
+                {cryptoDetails.name}
+              </h1>
+              <span className="lowercase text-gray-500">
+                ({cryptoDetails.slug})
+              </span>
+            </div>
           </div>
-          <p>
+          <p className="hidden md:block">
             {cryptoDetails.name} live price in US dollars. View value
             statistics, market cap and supply
           </p>
-        </Col>
-      </Row>
+        </div>
+      </div>
 
-      <div className=" border p-6 mb-9">
+      <div className="md:border md:p-6 mb-9">
         <Row>
-          <Col lg={6}>
+          <Col xs={24} lg={6}>
             <Select
               defaultValue="7d"
               className="w-full mb-4"
@@ -134,7 +137,7 @@ const Cryptocurrency = () => {
         </Row>
 
         <Row>
-          <Col lg={24}>
+          <Col xs={24} lg={24}>
             <LineChart
               coinHistory={coinHistory}
               currentPrice={millify(cryptoDetails.price)}
@@ -143,30 +146,40 @@ const Cryptocurrency = () => {
           </Col>
         </Row>
 
-        <div className="mt-6 flex flex-col gap-y-8">
+        <div className="mt-6 flex flex-col gap-y-10">
           <div>
-            <h1 className="text-lg font-bold">Market Stats</h1>
-            <div className="grid grid-cols-6 items-center mt-4">
+            <h1 className="text-lg font-extrabold md:font-bold">
+              Market Stats
+            </h1>
+            <div className="grid md:grid-cols-6 gap-y-6 items-center mt-4">
               {stats.map(({ title, value, icon }) => (
-                <div className="flex flex-col justify-center gap-y-2">
+                <div key={title} className="grid grid-cols-[auto,1fr] md:grid-cols-2 md:flex md:flex-col md:justify-center gap-x-4 gap-y-2">
                   <div>
-                    <h3 className="text-gray-500 text-sm font-bold">{title}</h3>
+                    <h3 className="text-lg font-normal md:text-gray-500 md:text-sm md:font-bold">
+                      {title}
+                    </h3>
                   </div>
-                  <p className="text-lg text-black font-medium">{value}</p>
+                  <p className="justify-self-end text-lg text-black font-medium">
+                    {value}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
 
           <div>
-            <h1 className="text-lg font-bold">Other Stats</h1>
-            <div className="grid grid-cols-6 items-center mt-4">
+            <h1 className="text-lg font-extrabold md:font-bold">Other Stats</h1>
+            <div className="grid md:grid-cols-6 gap-y-6 items-center mt-4">
               {genericStats.map(({ title, value, icon }) => (
-                <div className="flex flex-col justify-center gap-y-2">
+                <div key={title} className="grid grid-cols-[auto,1fr] md:grid-cols-2 md:flex md:flex-col md:justify-center gap-x-4 gap-y-2">
                   <div>
-                    <h3 className="text-gray-500 text-sm font-bold">{title}</h3>
+                    <h3 className="text-lg font-normal md:text-gray-500 md:text-sm md:font-bold">
+                      {title}
+                    </h3>
                   </div>
-                  <p className="text-lg text-black font-medium">{value}</p>
+                  <p className="justify-self-end text-lg text-black font-medium">
+                    {value}
+                  </p>
                 </div>
               ))}
             </div>
@@ -174,12 +187,12 @@ const Cryptocurrency = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-x-5 items-start">
-        <div className="border p-6">
+      <div className="mt-12 grid md:grid-cols-2 gap-x-5 items-start">
+        <div className="md:border md:p-6">
           <h3 className="text-2xl font-bold">What is {cryptoDetails.name}</h3>
           {HTMLReactParser(cryptoDetails.description)}
         </div>
-        <div className="border p-6">
+        <div className="mt-8 md:border md:p-6">
           <h3 className="text-2xl mb-4">{cryptoDetails.name} Links</h3>
           {cryptoDetails.links.map((link) => (
             <div key={link.name} className="grid grid-cols-2 gap-x-5">

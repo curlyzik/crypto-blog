@@ -9,8 +9,8 @@ import {
   MoneyCollectOutlined,
 } from "@ant-design/icons";
 import { useGetCryptosQuery } from "../src/services/cryptoApi";
-import CryptoCurrencies from "./cryptocurrencies";
-import News from "./news";
+import News from "../components/News";
+import Cryptos from "../components/Cryptos";
 
 export default function Home() {
   const { data, isFetching } = useGetCryptosQuery(10);
@@ -69,10 +69,12 @@ export default function Home() {
               Top 10 Cryptocurrencies in the world
             </h1>
             <p className="md:justify-self-end text-base mr-4 font-semibold text-blue-500 md:border-b-2 border-blue-500">
-              <Link href="/cryptocurrencies">Load More</Link>
+              <Link href="/cryptocurrencies">
+                <a>Load More</a>
+              </Link>
             </p>
           </div>
-          <CryptoCurrencies simplified />
+          <Cryptos simplified />
         </div>
         <div>
           <div className="grid md:grid-cols-[auto,1fr] md:items-center gap-2">
@@ -80,7 +82,9 @@ export default function Home() {
               Latest Crypto News
             </h1>
             <p className="md:justify-self-end text-base mr-4 font-semibold text-blue-500 md:border-b-2 border-blue-500">
-              <Link href="/news">Load More</Link>
+              <Link href="/news">
+                <a>Load More</a>
+              </Link>
             </p>
           </div>
           <News simplified />
