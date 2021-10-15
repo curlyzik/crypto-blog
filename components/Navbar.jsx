@@ -20,7 +20,9 @@ const Navbar = ({ collapsed }) => {
         collapsed={collapsed}
         className="min-h-full fixed left-0 z-50"
       >
-        <div className="text-3xl text-gray-900 p-5 ">Logo</div>
+        <div className="text-xl text-gray-900 p-5 ">
+          {collapsed ? "kHub" : "KryptoHub"}
+        </div>
         <Menu theme="" mode="inline" defaultSelectedKeys={["1"]}>
           <Menu.Item
             key="1"
